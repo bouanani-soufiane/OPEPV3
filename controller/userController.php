@@ -34,5 +34,9 @@ class UserController{
 
         $this->userModel->chooseRole($idrole, $email);
     }
+    public function retriveId($email){
+        return $this->userModel->retriveId($email);
+    }
+
 }
 ?>

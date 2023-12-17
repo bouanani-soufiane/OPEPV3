@@ -10,7 +10,6 @@ $routes = [
     '/note' => 'controllers/note.php',
     '/contact' => 'controllers/contact.php',
     '/users' => 'controllers/users.php',
-    '/user' => 'controllers/user.php',
 ];
 
 function routeToController($uri, $routes) {

@@ -2,31 +2,24 @@
 
 include_once '../config/database.php';
 
-class PlantModel
-{
+class PlantModel{
     private $plantId;
     private $plantName;
     private $plantPrice;
     private $plantImage;
     private $IDcategory;
-
     private $db;
     public function __construct(){
         $this->db = Database::getInstance()->getConnection();
     }
-
-
     public function __get($property)
     {
         if (property_exists($this, $property)) return $this->$property;
     }
-
     public function __set($property, $value)
     {
         if (property_exists($this, $property)) $this->$property = $value;
     }
-
-
     public function showAllPlants()
     {
         $query = "SELECT plante.*, categorie.nomCateorie FROM plante JOIN categorie ON plante.idCategorie = categorie.idCategorie;";
@@ -36,7 +29,6 @@ class PlantModel
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
     public function createPlant($plantName, $plantPrice, $plantImage, $IDcategory)
     {
         $this->plantName = $plantName;
@@ -54,7 +46,6 @@ class PlantModel
 
         $stmt->execute();
     }
-
     public function editPlante($plantId,$nomPlante, $prixPlante, $imageName, $catPlante)
     {
         $this->plantId = $plantId;

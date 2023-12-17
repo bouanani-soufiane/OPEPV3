@@ -4,10 +4,14 @@ require_once '../config/database.php';
 include_once 'userController.php';
 include_once 'planteController.php';
 include_once 'categorieController.php';
+include_once 'panierController.php';
 
 $plantController = new PlantController();
 $categController = new categorieController();
 $userController = new UserController();
+$panierController = new PanierController();
+
+
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST["ajouterPlante"])) {
@@ -88,6 +92,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         }elseif ($role == 2){
             $_SESSION['client'] = "client";
+            $idUser = $userController->retriveId($email);
+            $panierController->createPanier($idUser);
+
             header("Location: ../views/shop.php?");
 
 

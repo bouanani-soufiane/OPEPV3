@@ -1,16 +1,13 @@
 <?php
-class Users
-{
+class Users{
     private $name;
     private $email;
     private $password;
     private $idRole;
-
     private $db;
     public function __construct(){
         $this->db = Database::getInstance()->getConnection();
     }
-
     public function __get($property)
     {
         if (property_exists($this, $property)) {
@@ -52,6 +49,19 @@ class Users
         $stmt->bindValue(2, $this->email);
         $stmt->execute();
     }
+    public function retriveId($email)
+    {
+        $query = "SELECT idUser FROM utilisateur WHERE email = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(1, $email);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($result && isset($result['idUser'])) {
+            return $result['idUser'];
+        }
+        return null;
+    }
+
 
 
 }

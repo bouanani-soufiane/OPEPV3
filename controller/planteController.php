@@ -1,20 +1,16 @@
 <?php
 include '../model/PlanteModel.php';
 
-class PlantController
-{
+class PlantController{
     private $plantModel;
-
     public function __construct()
     {
         $this->plantModel = new PlantModel();
     }
-
     public function __get($property)
     {
         if (property_exists($this, $property)) return $this->$property;
     }
-
     public function __set($property, $value)
     {
         if (property_exists($this, $property)) $this->$property = $value;
@@ -39,14 +35,9 @@ class PlantController
     public function deletePlant($plantId){
         $this->plantModel->deletePlante($plantId);
     }
-
     public function showPlant(){
         return $this->plantModel->showAllPlants();
     }
-
-
-
-
 }
 ?>
 
