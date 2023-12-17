@@ -1,5 +1,5 @@
 <?php
-include_once "./header.php";
+    include_once "./header.php";
 ?>
 <main class="signup-form">
     <form class="" action="../controller/signup.php" method="post">

@@ -1,7 +1,7 @@
 <?php
-include_once '../controller/showNameCateg.php';
-include_once '../controller/showPlantes.php';
-include_once '../controller/showThemes.inc.php';
+include_once  '../controller/planteController.php';
+include_once  '../controller/categorieController.php';
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -214,25 +214,25 @@ include_once '../controller/showThemes.inc.php';
             <div class="">
                 <h1>Gestion des plantes</h1>
 
-                <form class="form" action="../controller/jouterPlante.inc.php" method="post" enctype="multipart/form-data">
+                <form class="form" action="../controller/controller.php" method="post" enctype="multipart/form-data">
                     <input name="nomPlante" type="text" placeholder="nom">
                     <input name="pricePlante" type="number" placeholder="prix">
                     <input name="imagePlante" type="file">
                     <select name="catPlante" id="">
                         <?php
-                        $categories = allCateg();
+                        $categ = new categorieController();
+                        $categories = $categ->showCateg();
                         foreach ($categories as $category) {
                             echo "<option value='{$category['idCategorie']}'>{$category['nomCateorie']}</option>";
                         }
                         ?>
+
                     </select>
+
                     <button class="btn btn-add" name="ajouterPlante">
                         ajouter plante
                     </button>
                 </form>
-
-
-
 
                 <table class="table">
 
@@ -257,32 +257,32 @@ include_once '../controller/showThemes.inc.php';
                     </thead>
 
                     <tbody style="text-align: center;">
-                    <?php
-                    $plantes = allPlante();
-                    foreach ($plantes as $plante) :
-                        ?>
+                        <?php
+                        $allplantes = new PlantController();
+                        $plantes = $allplantes->showPlant();
+                        foreach ($plantes as $plante) :
+                            ?>
 
                         <tr>
                             <td style="text-align: center;">
-                                <?= $plante['idPlante'] ?>
+                                <?=$plante['idPlante'] ;?>
                             </td>
                             <td style="text-align: center;">
-                                <?= $plante['nom'] ?>
+                                <?=$plante['nom'] ;?>
                             </td>
                             <td style="text-align: center;">
-                                <?= $plante['prix'] ?>
+                                <?=$plante['prix'] ;?>
                             </td>
                             <td style="text-align: center;">
-
                                 <img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($plante['image']); ?>" style="width: 200px; border-radius: 10px;" />
-
                             </td>
                             <td style="text-align: center;">
-                                <?= $plante['nomCateorie'] ?>
+                                <?=$plante['nomCateorie'] ;?>
+
                             </td>
                             <td style="text-align: center;">
                                 <a class="btn btn-info" href="modifierPlante.php?idPlante=<?= $plante['idPlante'] ?>">modifier</a>
-                                &nbsp;<a class="btn btn-danger" href="../controller/deletePlante.php?idPlante=<?= $plante['idPlante'] ?>">supprimer</a>
+                                &nbsp;<a class="btn btn-danger" href="../controller/controller.php?deletePlante=<?= $plante['idPlante'] ?>">supprimer</a>
                             </td>
                         </tr>
 
@@ -331,32 +331,35 @@ include_once '../controller/showThemes.inc.php';
 
                     <?php
 
-                    $categories = allCateg();
-                    foreach ($categories as $category) :
+//                    $categories = allCateg();
+//                    foreach ($categories as $category) :
 
                     ?>
 
                         <tr>
 
                             <td style="text-align: center;">
-                                <?= $category['idCategorie'] ?>
+                                <?php
+//                                 $plante['idPlante']
+                                ?>
+                            </td>
                             </td>
                             <td style="text-align: center;">
-                                <?= $category['nomCateorie'] ?>
+
                             </td>
                             <td style="text-align: center;">
-                                <?= $category['plantCount'] ?>
+
                             </td>
 
 
                             <td style="text-align: center;">
-                                <a class="btn btn-info" href="modifierCategorie.php?idCateg=<?= $category['idCategorie'] ?>">modifier</a>&nbsp;
-                                <a class="btn btn-danger" href="../controller/supprimerCategorie.inc.php?idCateg=<?= $category['idCategorie'] ?>">supprimer</a>
+                                <a class="btn btn-info" href="modifierCategorie.php?idCateg=">modifier</a>&nbsp;
+                                <a class="btn btn-danger" href="../controller/supprimerCategorie.inc.php?idCateg=">supprimer</a>
                             </td>
 
                         </tr>
                     <?php
-                    endforeach;
+//                    endforeach;
                     ?>
 
                     </tbody>
@@ -399,18 +402,20 @@ include_once '../controller/showThemes.inc.php';
 
 
                     <?php
-                    $themes = allThemes();
-                    foreach ($themes as $theme) :
+//                    $themes = allThemes();
+//                    foreach ($themes as $theme) :
                     ?>
                     <tbody style="text-align: center;">
                         <tr>
 
                             <td style="text-align: center;">
-                                <?= $theme['idTheme'] ?>
+                                <?php
+                                //                                 $plante['idPlante']
+                                ?>
 
                             </td>
                             <td style="text-align: center;">
-                                <?= $theme['nomTheme'] ?>
+
                             </td>
                             <td style="text-align: center;">
                                 <img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($theme['imageTheme']); ?>" style="width: 200px; border-radius: 10px;" />
@@ -418,13 +423,13 @@ include_once '../controller/showThemes.inc.php';
 
                             </td>
                             <td style="text-align: center;">
-                                <?= $theme['descriptionTheme'] ?>
+
                             </td>
 
 
                             <td style="text-align: center;">
-                                <a class="btn btn-info" href="modifierTheme.php?idTheme=<?= $theme['idTheme'] ?>">modifier</a>&nbsp;
-                                <a class="btn btn-danger" href="../controller/supprimerTheme.inc.php?idTheme=<?= $theme['idTheme'] ?>">supprimer</a>
+                                <a class="btn btn-info" href="modifierTheme.php?idTheme=">modifier</a>&nbsp;
+                                <a class="btn btn-danger" href="../controller/supprimerTheme.inc.php?idTheme=">supprimer</a>
                             </td>
 
 
@@ -433,7 +438,7 @@ include_once '../controller/showThemes.inc.php';
                     </tbody>
 
                     <?php
-                    endforeach;
+//                    endforeach;
                     ?>
 
                 </table>
@@ -446,13 +451,20 @@ include_once '../controller/showThemes.inc.php';
             <div class="">
                 <h1>Gestion des tags</h1>
 
-                <form class="form" action="../includes/ajouttag.php" method="post">
+                <form class="form" action="../controller/ajouterTag.inc.php" method="post">
                     <input name="tagName" type="text" placeholder="nom de tag">
 
                     <select name="themeTag" id="">
-
-
+                        <?php
+//                        $themes = allThemes();
+//                        foreach ($themes as $theme) :
+                            ?>
+                            <option ></option>
+                        <?php
+//                        endforeach;
+                        ?>
                     </select>
+
                     <button class="btn btn-add" name="ajouterTag">
                         ajouter le tag
                     </button>

@@ -12,7 +12,6 @@ class User
     {
         $query = "INSERT INTO `utilisateur` (`nom`, `email`, `passwordUser`, `idRole`) VALUES (?, ?, ?, ?)";
 
-
         $stmt = $this->db->prepare($query);
         $hashedpdw = password_hash($passwordUser, PASSWORD_DEFAULT);
 
@@ -31,5 +30,4 @@ class User
         $stmt->bindParam(2, $email);
         $stmt->execute();
     }
-
 }

@@ -31,7 +31,7 @@ class Plante
 
         return $categ;
     }
-    public function modifierPlantes($nomPlante, $prixPlante, $imageName, $catPlante, $id)
+        public function modifierPlantes($nomPlante, $prixPlante, $imageName, $catPlante, $id)
     {
         $query = "UPDATE plante SET nom = ?, prix = ?, image = ?, idCategorie = ? WHERE idPlante = ?";
 
@@ -45,7 +45,7 @@ class Plante
 
         $stmt->execute();
     }
-    public function supprimerPlantes($id)
+        public function supprimerPlantes($id)
     {
 
         $query = "DELETE FROM plante WHERE idPlante = ?";

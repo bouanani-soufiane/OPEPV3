@@ -1,7 +1,8 @@
 <?php
-include_once '../controller/showNameCateg.php';
+include_once  '../controller/planteController.php';
+include_once  '../controller/categorieController.php';
 
-session_start();
+//session_start();
 $id = @$_GET['idPlante'];
 ?>
 <!DOCTYPE html>
@@ -203,7 +204,7 @@ $id = @$_GET['idPlante'];
             <div class="box">
                 <div class="">
                     <h1>modifier plante</h1> <br>
-                    <form class="form" action="../controller/modifierPlante.inc.php" method="post" id="editForm" enctype="multipart/form-data">
+                    <form class="form" action="../controller/controller.php" method="post" id="editForm" enctype="multipart/form-data">
 
                             <input type="hidden" name="id" value="<?= $_GET['idPlante']?>">
                             <input required name="nomPlanteEdit" type="text" placeholder="nom" value="">
@@ -211,8 +212,8 @@ $id = @$_GET['idPlante'];
                             <input required name="imagePlanteEdit" type="file" value="">
                             <select required name="catPlanteEdit" id="">
                                 <?php
-                                $allCateg = new AllCateg();
-                                $categories = $allCateg->execute();
+                                $categ = new categorieController();
+                                $categories = $categ->showCateg();
                                 foreach ($categories as $category) {
                                     echo "<option value='{$category['idCategorie']}'>{$category['nomCateorie']}</option>";
                                 }
@@ -223,11 +224,6 @@ $id = @$_GET['idPlante'];
                             </button>
 
                     </form>
-
-
-
-
-
 
                 </div>
 
@@ -240,7 +236,7 @@ $id = @$_GET['idPlante'];
 </div>
 
 <!-- =========== Scripts =========  -->
-<script src="../assets/js/main.js"></script>
+<script src="../assets/js/dashboard.js"></script>
 
 <!-- ====== ionicons ======= -->
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
