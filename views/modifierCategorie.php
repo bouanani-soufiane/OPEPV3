@@ -201,10 +201,10 @@
             <div class="box">
                 <div class="">
                     <h1>modifier Categorie</h1> <br>
-                    <form class="form" action="../controller/modifierCateg.inc.php" method="post" id="editForm">
+                    <form class="form" action="../controller/controller.php" method="post" id="editForm">
 
 
-                            <input type="hidden" name="id" value="<?= $_GET['idCateg']?>">
+                                <input type="hidden" name="id" value="<?= $_GET['idCateg']?>">
                             <input required name="nomCategEdit" type="text" placeholder="nom" value="">
 
                             <button class="btn btn-add" name="editCateg">
@@ -212,11 +212,6 @@
                             </button>
 
                     </form>
-
-
-
-
-
 
                 </div>
 

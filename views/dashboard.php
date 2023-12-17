@@ -1,6 +1,6 @@
 <?php
-include_once  '../controller/planteController.php';
-include_once  '../controller/categorieController.php';
+include_once '../controller/planteController.php';
+include_once '../controller/categorieController.php';
 
 ?>
 <!DOCTYPE html>
@@ -303,7 +303,7 @@ include_once  '../controller/categorieController.php';
         <div class="box">
             <div class="">
                 <h1>Gestion des categories</h1>
-                <form class="form" action="../controller/ajouterCateg.inc.php" method="post">
+                <form class="form" action="../controller/controller.php" method="post">
                     <input name="nomCateg" type="text" placeholder="nom">
                     <button class="btn btn-add" name="ajouterCateg">
                         ajouter categorie
@@ -330,36 +330,35 @@ include_once  '../controller/categorieController.php';
                     <tbody style="text-align: center;">
 
                     <?php
-
-//                    $categories = allCateg();
-//                    foreach ($categories as $category) :
+                    $categ = new categorieController();
+                    $categories = $categ->showCateg();
+                    foreach ($categories as $category) :
 
                     ?>
 
                         <tr>
 
                             <td style="text-align: center;">
-                                <?php
-//                                 $plante['idPlante']
-                                ?>
+                                <?=$category['idCategorie']?>
                             </td>
                             </td>
                             <td style="text-align: center;">
+                                <?=$category['nomCateorie']?>
 
                             </td>
                             <td style="text-align: center;">
-
+                                <?=$category['plantCount']?>
                             </td>
 
 
                             <td style="text-align: center;">
-                                <a class="btn btn-info" href="modifierCategorie.php?idCateg=">modifier</a>&nbsp;
-                                <a class="btn btn-danger" href="../controller/supprimerCategorie.inc.php?idCateg=">supprimer</a>
+                                <a class="btn btn-info" href="modifierCategorie.php?idCateg=<?= $category['idCategorie'] ?>">modifier</a>&nbsp;
+                                    <a class="btn btn-danger" href="../controller/controller.php?deleteCateg=<?= $category['idCategorie'] ?>">supprimer</a>
                             </td>
 
                         </tr>
                     <?php
-//                    endforeach;
+                    endforeach;
                     ?>
 
                     </tbody>

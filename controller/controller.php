@@ -2,8 +2,10 @@
 require_once '../config/database.php';
 include_once 'userController.php';
 include_once 'planteController.php';
+include_once 'categorieController.php';
 
 $plantController = new PlantController();
+$categController = new categorieController();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST["ajouterPlante"])) {
@@ -46,7 +48,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         header("Location: ../views/dashboard.php?edited=success");
     }
+    if (isset($_POST["ajouterCateg"])) {
+        $nomCateg = $_POST['nomCateg'];
 
+        $categController->createCateg($nomCateg);
+
+        header("Location: ../views/dashboard.php?added=success");
+    }
+    if (isset($_POST["editCateg"])) {
+        $idCateg = $_POST['id'];
+        $nomCateg = $_POST['nomCategEdit'];
+
+        $categController->editCateg($idCateg,$nomCateg);
+
+        header("Location: ../views/dashboard.php?edited=success");
+    }
 
 }
 
@@ -54,15 +70,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET'){
     if(isset($_GET['deletePlante'])){
-
         $plantController->deletePlant($_GET['deletePlante']);
         header("Location: ../views/dashboard.php?deleted=success");
     }
-//    if(isset($_GET['kkk'])){
-//        echo $_GET['deleteId'];
-//        $plantController = new PlantController();
-//        $plantController->deletePlant($_GET['deletePlantId']);
-//        header('Location: ../../public/admin/plant.php?msg=deleted');
-//    }
+    if(isset($_GET['deleteCateg'])){
+        $categController->deleteCateg($_GET['deleteCateg']);
+        header("Location: ../views/dashboard.php?deleted=success");
+
+    }
 
 }
