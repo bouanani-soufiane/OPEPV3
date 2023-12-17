@@ -1,5 +1,4 @@
 <?php
-
 include '../model/PlanteModel.php';
 
 class PlantController
