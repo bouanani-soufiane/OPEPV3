@@ -382,10 +382,14 @@ include_once '../controller/categorieController.php';
 </nav>
 
 <div class="container">
+    <div class="text-center text-white my-5">
+        <h1 class="my-5" >Welcome To Our Store </h1>
+        <p class="w-50 mx-auto">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Totam quasi dolore inventore expedita. Unde eius facilis eveniet nihil fuga, odit accusamus quisquam! Nobis, nam. Quos quae voluptatibus esse tempore porro?</p>
+    </div>
     <div class="bg-white rounded d-flex align-items-center justify-content-between mt-4" id="header">
-        <button class="btn btn-hide text-uppercase" type="button" data-bs-toggle="collapse" data-bs-target="#filterbar" aria-expanded="false" aria-controls="filterbar">
+        <button class="btn btn-hide" type="button" data-bs-toggle="collapse" data-bs-target="#filterbar" aria-expanded="false" aria-controls="filterbar">
             <span class="fas fa-angle-left" id="filter-angle"></span>
-            <span id="btn-txt">Hide filters</span>
+            <span id="btn-txt">Show Filters</span>
         </button>
 
             <input type="search" class="form-control" id="live_search" autocomplete="off" placeholder="search" style="width: 80%; margin: auto">

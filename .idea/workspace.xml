@@ -5,18 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bbeccf3d-9b7d-4640-9869-cb204f06e13d" name="Changes" comment="updated">
-      <change afterPath="$PROJECT_DIR$/views/shop.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/planteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/planteController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/article.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/blog.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/client/index.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/client/footer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/header.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/client/header.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/modifierTheme.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/role.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/authentication/role.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/signUp.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/authentication/signUp.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/categorieController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/categorieController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/controller.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/jouterPlante.inc.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/userController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/userController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/user.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/user.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/userModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/userModel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/authentication/role.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/role.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/authentication/signUp.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/signUp.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/shop.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/shop.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +50,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -87,7 +85,8 @@
       <workItem from="1702741094854" duration="6650000" />
       <workItem from="1702749336309" duration="58000" />
       <workItem from="1702752728254" duration="20228000" />
-      <workItem from="1702807874489" duration="19757000" />
+      <workItem from="1702807874489" duration="26901000" />
+      <workItem from="1702842122512" duration="9345000" />
     </task>
     <task id="LOCAL-00001" summary="tag class added">
       <option name="closed" value="true" />

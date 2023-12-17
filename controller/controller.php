@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once '../config/database.php';
 include_once 'userController.php';
 include_once 'planteController.php';
@@ -6,6 +7,7 @@ include_once 'categorieController.php';
 
 $plantController = new PlantController();
 $categController = new categorieController();
+$userController = new UserController();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST["ajouterPlante"])) {
@@ -32,12 +34,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $prixPlante = $_POST['pricePlanteEdit'];
         $catPlante = $_POST['catPlanteEdit'];
 
-
-
         $tmp_name = $_FILES['imagePlanteEdit']['tmp_name'];
 
         $imageName = file_get_contents($tmp_name);
-
 
         $plantController->__set("plantName", $nomPlante);
         $plantController->__set("plantPrice", $prixPlante);
@@ -50,18 +49,50 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
     if (isset($_POST["ajouterCateg"])) {
         $nomCateg = $_POST['nomCateg'];
-
         $categController->createCateg($nomCateg);
-
         header("Location: ../views/dashboard.php?added=success");
     }
     if (isset($_POST["editCateg"])) {
         $idCateg = $_POST['id'];
         $nomCateg = $_POST['nomCategEdit'];
-
         $categController->editCateg($idCateg,$nomCateg);
-
         header("Location: ../views/dashboard.php?edited=success");
+    }
+    if (isset($_POST["signup-submit"])) {
+        $name = $_POST["uid"];
+        $email = $_POST["email"];
+        $password = $_POST["password"];
+        $repeatedPassword = $_POST["password-repeat"];
+
+        $userController->__set("name", $name);
+        $userController->__set("email", $email);
+        $userController->__set("password", $password);
+
+        $userController->createUser($name, $email, $password);
+
+        $_SESSION['email'] = $email;
+
+        header("Location: ../views/role.php?");
+    }
+    if (isset($_POST["role-submit"])) {
+        $role = $_POST["role"];
+        $email = $_SESSION["email"];
+
+        $userController->__set("idrole", $role);
+        $userController->__set("email", $email);
+        $userController->chooseRole($role,$email);
+
+        if($role == 1){
+            $_SESSION['admin'] = "admin";
+            header("Location: ../views/dashboard.php?");
+
+        }elseif ($role == 2){
+            $_SESSION['client'] = "client";
+            header("Location: ../views/shop.php?");
+
+
+        }
+
     }
 
 }

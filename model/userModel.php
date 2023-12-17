@@ -6,12 +6,9 @@ class Users
     private $password;
     private $idRole;
 
-    public function __construct($name, $email, $password, $idRole)
-    {
-        $this->name = $name;
-        $this->email = $email;
-        $this->password = $password;
-        $this->idRole = $idRole;
+    private $db;
+    public function __construct(){
+        $this->db = Database::getInstance()->getConnection();
     }
 
     public function __get($property)
@@ -22,7 +19,6 @@ class Users
             throw new Exception("Undefined property: $property");
         }
     }
-
     public function __set($property, $value)
     {
         if (property_exists($this, $property)) {
@@ -31,6 +27,33 @@ class Users
             throw new Exception("Undefined property: $property");
         }
     }
+    public function createUser($name, $email, $passwordUser){
+        $this->name = $name;
+        $this->email = $email;
+        $this->password = password_hash($passwordUser, PASSWORD_DEFAULT);
+
+        $query = "INSERT INTO `utilisateur` (`nom`, `email`, `passwordUser`, `idRole`) VALUES (?, ?, ?, null)";
+
+        $stmt = $this->db->prepare($query);
+
+        $stmt->bindValue(1, $this->name);
+        $stmt->bindValue(2, $this->email);
+        $stmt->bindValue(3, $this->password);
+
+        $stmt->execute();
+    }
+    public function chooseRole($idrole,$email)
+    {
+        $this->idRole = $idrole;
+        $this->email = $email;
+        $query = "update utilisateur set idRole = ? where email = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindValue(1, $this->idRole);
+        $stmt->bindValue(2, $this->email);
+        $stmt->execute();
+    }
+
+
 }
 
 ?>
