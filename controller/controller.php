@@ -91,10 +91,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             header("Location: ../views/dashboard.php?");
 
         }elseif ($role == 2){
-            $_SESSION['client'] = "client";
             $idUser = $userController->retriveId($email);
             $panierController->createPanier($idUser);
-
+            $idPanier = $panierController->retriveId($idUser);
+            $_SESSION['client'] = "client";
+            $_SESSION['idUser'] = $idUser;
+            $_SESSION['idPanier'] = $idPanier;
             header("Location: ../views/shop.php?");
 
 

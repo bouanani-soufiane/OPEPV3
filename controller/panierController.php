@@ -1,20 +1,17 @@
 <?php
 include '../model/panierModel.php';
 
-class PanierController
-{
+class PanierController{
     private $panierModel;
 
     public function __construct()
     {
         $this->panierModel = new PanierModel();
     }
-
     public function __get($property)
     {
         if (property_exists($this, $property)) return $this->$property;
     }
-
     public function __set($property, $value)
     {
         if (property_exists($this, $property)) $this->$property = $value;
@@ -25,8 +22,9 @@ class PanierController
 
         $this->panierModel->createPanier($idUser);
     }
-
-
+    public function retriveId($idUser){
+        return $this->panierModel->retriveId($idUser);
+    }
 
 
 }

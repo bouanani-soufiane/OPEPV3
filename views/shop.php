@@ -3,8 +3,11 @@
 include_once '../controller/planteController.php';
 include_once '../controller/categorieController.php';
 
-
-
+//include '../function.php';
+//session_start();
+//dd($_SESSION);
+//session_unset();
+//session_destroy();
 ?>
 
 <!DOCTYPE html>
