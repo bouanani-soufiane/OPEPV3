@@ -32,18 +32,31 @@ class PanierplanteModel
             $updateStmt->bindParam(1, $this->plante_id);
             $updateStmt->execute();
 
-            $checkSql = 'SELECT * FROM panierplante WHERE plante_id = ?';
+            $checkSql = 'SELECT * FROM panierplante WHERE plante_id = ? AND panier_id = ?';
             $checkStmt = $this->db->prepare($checkSql);
             $checkStmt->bindParam(1, $this->plante_id);
+            $checkStmt->bindParam(2, $_SESSION['idPanier']);
             $checkStmt->execute();
-
+//            if ($row = $checkStmt->fetch(PDO::FETCH_ASSOC)) {
+//                echo $row['idPivot'];
+//                exit();
+//            }
             if ($checkStmt->rowCount() > 0) {
-                $getQttSql = 'SELECT quantite FROM panierplante WHERE plante_id = ?';
+
+                $getQttSql = 'SELECT quantite FROM panierplante WHERE plante_id = :plante_id AND panier_id = :panier_id';
+
                 $getQttStmt = $this->db->prepare($getQttSql);
-                $getQttStmt->bindParam(1, $this->plante_id);
+
+                $getQttStmt->bindParam(':plante_id', $this->plante_id, PDO::PARAM_INT);
+                $getQttStmt->bindParam(':panier_id', $_SESSION['idPanier'], PDO::PARAM_INT);
+
                 $getQttStmt->execute();
 
+
                 if ($row = $getQttStmt->fetch(PDO::FETCH_ASSOC)) {
+//                    echo $row['quantite'];
+//                    exit();
+
                     $currentQTT = $row['quantite'];
                     $currentQTT++;
                     $updateQtySql = 'UPDATE panierplante SET quantite = ? WHERE plante_id = ?';
@@ -68,11 +81,14 @@ class PanierplanteModel
         }
     }
     public function showPanier(){
-        $query = "SELECT * FROM panierplante, panier, plante WHERE panierplante.plante_id = plante.idPlante AND panierplante.panier_id = panier.idPanier AND panier.idUser = 79 AND panierplante.status = 1;";
+        $query = "SELECT * FROM panierplante 
+              JOIN panier ON panierplante.panier_id = panier.idPanier 
+              JOIN plante ON panierplante.plante_id = plante.idPlante 
+              WHERE panier.idUser = :userId AND panierplante.status = 1";
 
         $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':userId', $_SESSION['idUser'], PDO::PARAM_INT);
         $stmt->execute();
-
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     public function deleteFromPanier($id)
