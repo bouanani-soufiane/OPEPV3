@@ -4,6 +4,7 @@ session_start();
 include_once '../controller/planteController.php';
 include_once '../controller/categorieController.php';
 include_once '../controller/panierPlanteController.php';
+include_once '../model/panierPlanteModel.php';
 
 if (empty($_SESSION['client'])) {
     header('Location: signUp.php');
@@ -54,6 +55,37 @@ if (empty($_SESSION['client'])) {
     h1 {
         text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
     }
+    .cart {
+        position: relative;
+        display: block;
+        width: 28px;
+        height: 28px;
+        height: auto;
+        overflow: hidden;
+    .material-icons {
+        position: relative;
+        top: 4px;
+        z-index: 1;
+        font-size: 24px;
+        color: white;
+    }
+    .count {
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 2;
+        font-size: 11px;
+        border-radius: 50%;
+        background: #d60b28;
+        width: 16px;
+        height: 16px;
+        line-height:16px;
+        display: block;
+        text-align: center;
+        color: white;
+        font-family: 'Roboto', sans-serif;
+        font-weight: bold;
+    }
 
 </style>
 
@@ -77,7 +109,16 @@ if (empty($_SESSION['client'])) {
                 </li>
                 <li class="">
                     <a class="nav-link  text-white" href="#">
-                        Cart
+                        <div class="cart">
+                            <span class="count">
+                                  <?php
+                                  $panierPlante = new PanierplanteModel();
+                                  $countPanier = $panierPlante->countPanier();
+                                  echo $countPanier;
+                                  ?>
+                            </span>
+                            <i class="fa fa-lg fa-shopping-cart"></i>
+                        </div>
                     </a>
                 </li>
                 <li class="nav-item">

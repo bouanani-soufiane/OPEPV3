@@ -108,6 +108,16 @@ class PanierplanteModel
         $stmt->bindParam(1, $idplante);
         $stmt->execute();
     }
+    public function countPanier() {
+        $query = "SELECT count(panierplante.panier_id) as count FROM panierplante WHERE panier_id = :userId and status = 1";
+
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':userId', $_SESSION['idPanier'], PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchColumn();
+    }
+
+
 
 
 }

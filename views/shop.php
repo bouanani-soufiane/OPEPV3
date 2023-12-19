@@ -4,6 +4,7 @@ session_start();
 include_once '../controller/planteController.php';
 include_once '../controller/categorieController.php';
 include_once '../controller/panierPlanteController.php';
+include_once '../model/panierPlanteModel.php';
 
 if (empty($_SESSION['client'])) {
     header('Location: signUp.php');
@@ -22,6 +23,8 @@ if (empty($_SESSION['client'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI/tUa9qXGi+0e6Q8lG1zTPYY39MlZvA7AjOx4fU=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-yGBsXpPFFLEGD2Z/J6a3chIpN4I/XFdbn2jkPJH2eZxGc2gwdS04Mw9laYfh9Y4u" crossorigin="anonymous"></script>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
     <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
 
     <title>our shop</title>
@@ -384,6 +387,39 @@ if (empty($_SESSION['client'])) {
         text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
     }
 
+
+    .cart {
+        position: relative;
+        display: block;
+        width: 28px;
+        height: 28px;
+        height: auto;
+        overflow: hidden;
+    .material-icons {
+        position: relative;
+        top: 4px;
+        z-index: 1;
+        font-size: 24px;
+        color: white;
+    }
+    .count {
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 2;
+        font-size: 11px;
+        border-radius: 50%;
+        background: #d60b28;
+        width: 16px;
+        height: 16px;
+        line-height:16px;
+        display: block;
+        text-align: center;
+        color: white;
+        font-family: 'Roboto', sans-serif;
+        font-weight: bold;
+    }
+
 </style>
 
 <nav class="navbar navbar-expand-lg" style="background-color: #508D69;">
@@ -406,7 +442,16 @@ if (empty($_SESSION['client'])) {
                 </li>
                 <li class="">
                     <a class="nav-link  text-white" href="panier.php" >
-                        Cart
+                        <div class="cart">
+                            <span class="count">
+                                  <?php
+                                  $panierPlante = new PanierplanteModel();
+                                  $countPanier = $panierPlante->countPanier();
+                                  echo $countPanier;
+                                  ?>
+                            </span>
+                            <i class="fa fa-lg fa-shopping-cart"></i>
+                        </div>
                     </a>
                 </li>
                 <li class="nav-item">
