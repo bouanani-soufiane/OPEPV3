@@ -467,7 +467,6 @@ if (empty($_SESSION['client'])) {
 <div class="container">
     <div class="bg-white rounded d-flex align-items-center justify-content-between mt-4" id="header">
         <button class="btn btn-hide" type="button" data-bs-toggle="collapse" data-bs-target="#filterbar" aria-expanded="false" aria-controls="filterbar">
-            <span class="fas fa-angle-left" id="filter-angle"></span>
             <span id="btn-txt">Show Filters</span>
         </button>
 
@@ -476,7 +475,7 @@ if (empty($_SESSION['client'])) {
     </div>
     <div id="content" class="my-5 ">
         <div id="filterbar" class="collapse">
-            <div class="box mt-1">
+            <form class="box mt-1"  method="post" action="../controller/controller.php">
                 <div class="form-group text-center">
 
                 </div>
@@ -488,37 +487,38 @@ if (empty($_SESSION['client'])) {
 
                     ?>
                     <div>
-
-                        <label class="tick my-3 mr-2" for="<?=$category['idCategorie'] ;?>"><?=$category['nomCateorie'] ;?><input id="<?=$category['idCategorie'] ;?>" value="<?=$category['idCategorie'] ;?>" name="filter[]" type="checkbox"><span class="check"></span></label>
+                        <label class="tick my-3 mr-2" for="<?=$category['idCategorie'] ;?>"><?=$category['nomCateorie'] ;?>
+                            <input id="<?=$category['idCategorie'] ;?>" value="<?=$category['idCategorie'] ;?>" name="filter"  type="checkbox" class="checkedCateg">
+                            <span class="check"></span>
+                        </label>
                     </div>
 
                 <?php
                     endforeach;
-                    ?>
-                <div class="btn-group text-center" data-toggle="buttons">
-                    <label class="btn btn-success form-check-label active">
-                        <input class="" type="radio" checked> Apply
-                    </label>
+                ?>
+                <div class="btn-group text-center justify-content-center" data-toggle="buttons">
+                    <input class="btn btn-success" type="submit" value="apply" name="filterByCateg" id="apply">
                 </div>
-            </div>
+
+            </form>
 
         </div>
         <div id="products">
-            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mx-0">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mx-0" id="searchresult">
                 <?php
                 $allplantes = new PlantController();
                 $plantes = $allplantes->showPlant();
                 foreach ($plantes as $plante) :
-                ?>
-                <div class="col">
-                    <div class="card d-flex flex-column align-items-center">
-                        <p><?= $plante['nom']; ?></p>
-                        <img class="my-2" src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($plante['image']); ?>" style="width: 200px;  border-radius: 10px;" />
-                        <div>
-                            <a class="btn btn-shop btn-sm" href="../controller/controller.php?addToPanier=<?= $plante['idPlante']; ?>">Ajouter au panier</a>
+                    ?>
+                    <div class="col">
+                        <div class="card d-flex flex-column align-items-center">
+                            <p><?= $plante['nom']; ?></p>
+                            <img class="my-2" src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($plante['image']); ?>" style="width: 200px;  border-radius: 10px;" />
+                            <div>
+                                <a class="btn btn-shop btn-sm" href="../controller/controller.php?addToPanier=<?= $plante['idPlante']; ?>">Ajouter au panier</a>
+                            </div>
                         </div>
                     </div>
-                </div>
                 <?php
                 endforeach;
                 ?>
@@ -527,6 +527,38 @@ if (empty($_SESSION['client'])) {
     </div>
 </div>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+
+<script>
+    $(document).ready(function() {
+        $("#live_search").keyup(function() {
+            var input = $(this).val();
+            if (input != "") {
+                $.ajax({
+                    url: "livesearch.inc.php",
+                    method: "POST",
+                    data: {
+                        search_input: input
+                    },
+                    success: function(data) {
+                        $("#searchresult").html(data);
+                        $("#searchresult").css("display", "block");
+                        $(".product").css("display", "none");
+                        $(".box").css("box-shadow", "none");
+
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.log("AJAX Error:", textStatus, errorThrown);
+                    }
+                });
+            } else {
+                $("#searchresult").css("display", "none");
+                $(".product").css("display", "block");
+            }
+        });
+    });
+</script>
 
 
 
@@ -538,10 +570,7 @@ if (empty($_SESSION['client'])) {
 
 
 
-
-
-
-
+<!--<script src="../assets/js/ajax.js"></script>-->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 </body>

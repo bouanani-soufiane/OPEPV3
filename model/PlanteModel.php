@@ -70,5 +70,34 @@ class PlantModel{
         $stmt->execute();
 
     }
+    public function filterByCateg($catChecked)
+    {
+        $query = "SELECT plante.*, categorie.nomCateorie FROM plante JOIN categorie ON plante.idCategorie = categorie.idCategorie WHERE categorie.idCategorie = $catChecked ";
+
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function search($input)
+    {
+        if (empty($input)) {
+            $query = "SELECT plante.*, categorie.nomCateorie FROM plante JOIN categorie ON plante.idCategorie = categorie.idCategorie;";
+        } else {
+            $query = "SELECT plante.*, categorie.nomCateorie FROM plante JOIN categorie ON plante.idCategorie = categorie.idCategorie WHERE plante.nom LIKE :input;";
+        }
+
+        $stmt = $this->db->prepare($query);
+
+        if (!empty($input)) {
+            $stmt->bindValue(':input', $input . '%', PDO::PARAM_STR);
+        }
+
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
 
 }

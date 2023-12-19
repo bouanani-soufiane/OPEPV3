@@ -15,7 +15,6 @@ class PlantController{
     {
         if (property_exists($this, $property)) $this->$property = $value;
     }
-
 //    this should accept Plant model as parametter
     public function createPlante(PlantModel $PlantModel)
     {
@@ -35,6 +34,10 @@ class PlantController{
     public function showPlant(){
         return $this->plantModel->showAllPlants();
     }
+    public function filterByCateg($catChecked){
+        return $this->plantModel->filterByCateg($catChecked);
+    }
+
 }
 ?>
 

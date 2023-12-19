@@ -4,8 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bbeccf3d-9b7d-4640-9869-cb204f06e13d" name="Changes" comment="updated">
+    <list default="true" id="bbeccf3d-9b7d-4640-9869-cb204f06e13d" name="Changes" comment="fixed panier bugs">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/controller.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/planteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/planteController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/PlanteModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/PlanteModel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/panier.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/panier.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/shop.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/shop.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +86,8 @@
       <workItem from="1702894678751" duration="17357000" />
       <workItem from="1702922578830" duration="10214000" />
       <workItem from="1702935391743" duration="15217000" />
-      <workItem from="1702973562795" duration="12765000" />
+      <workItem from="1702973562795" duration="22402000" />
+      <workItem from="1703009513219" duration="5618000" />
     </task>
     <task id="LOCAL-00001" summary="tag class added">
       <option name="closed" value="true" />
@@ -107,7 +113,15 @@
       <option name="project" value="LOCAL" />
       <updated>1702814505046</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="fixed panier bugs">
+      <option name="closed" value="true" />
+      <created>1702992392713</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1702992392713</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -133,7 +147,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="tag class added" />
     <MESSAGE value="updated" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated" />
+    <MESSAGE value="fixed panier bugs" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed panier bugs" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

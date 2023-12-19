@@ -184,7 +184,6 @@ if (empty($_SESSION['client'])) {
             </tr>
             <?php
                 endforeach;
-
             ?>
             </tbody>
             <tfoot>
@@ -192,8 +191,8 @@ if (empty($_SESSION['client'])) {
             <tr>
                 <td style="padding: 25px;"><a href="#" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
                 <td colspan="2" class="hidden-xs"></td>
-                <td class="hidden-xs text-center"><strong>Total $ 5.11</strong></td>
-                <td><a href="#" class="btn btn-success btn-block">Purchase<i class="fa fa-angle-right"></i></a></td>
+                <td class="hidden-xs text-center"><strong></strong></td>
+                <td><a href="#" class=""><i class=""></i></a></td>
             </tr>
             </tfoot>
         </table>

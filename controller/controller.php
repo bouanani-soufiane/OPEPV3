@@ -6,7 +6,7 @@ include_once 'categorieController.php';
 include_once 'panierController.php';
 include_once  'panierPlanteController.php';
 include_once 'commandeController.php';
-
+include '../function.php';
 
 $plantController = new PlantController();
 $categController = new categorieController();
@@ -129,7 +129,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo "Invalid email or password";
         }
     }
-
+    if (isset($_POST["filterByCateg"])) {
+        $placeholders =  $plantController->filterByCateg($_POST["filter"]);
+        dd($placeholders);
+    }
 }
 
 
@@ -180,3 +183,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET'){
 
 
 }
+
+
+// Check if data is sent via POST
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Get the JSON-encoded data from the request body
+    $postData = file_get_contents('php://input');
+
+    // Decode the JSON data into a PHP associative array
+    $data = json_decode($postData, true);
+
+    // Check if decoding was successful
+    if ($data !== null) {
+        // Access the array of data
+        $dataArray = $data['data'];
+
+        // Handle the data as needed
+        // For example, you can loop through the array
+        foreach ($dataArray as $value) {
+            echo $value . "\n";
+        }
+    } else {
+        // Handle JSON decoding error
+        echo 'Error decoding JSON data';
+    }
+} else {
+    // Handle invalid request method
+    echo 'Invalid request method';
+}
+
+
