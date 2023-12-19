@@ -61,6 +61,31 @@ class Users{
         }
         return null;
     }
+    public function retriveRole($email)
+    {
+        $query = "SELECT idRole FROM utilisateur WHERE email = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(1, $email);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($result && isset($result['idRole'])) {
+            return $result['idRole'];
+        }
+        return null;
+    }
+    public function login($email, $password){
+        $query = "SELECT idUser, passwordUser FROM utilisateur WHERE email = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(1, $email);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($result && password_verify($password, $result['passwordUser'])) {
+            return $result['idUser'];
+        } else {
+            return null;
+        }
+    }
+
 
 
 

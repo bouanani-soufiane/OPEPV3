@@ -1,13 +1,17 @@
 <?php
+session_start();
 
 include_once '../controller/planteController.php';
 include_once '../controller/categorieController.php';
+include_once '../controller/panierPlanteController.php';
+
+if (empty($_SESSION['client'])) {
+    header('Location: signUp.php');
+}
 
 //include '../function.php';
-//session_start();
 //dd($_SESSION);
-//session_unset();
-//session_destroy();
+
 ?>
 
 <!DOCTYPE html>
@@ -18,7 +22,7 @@ include_once '../controller/categorieController.php';
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI/tUa9qXGi+0e6Q8lG1zTPYY39MlZvA7AjOx4fU=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-yGBsXpPFFLEGD2Z/J6a3chIpN4I/XFdbn2jkPJH2eZxGc2gwdS04Mw9laYfh9Y4u" crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script> <!-- Replace 'your-fontawesome-kit.js' with your actual FontAwesome kit URL -->
+    <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
 
     <title>our shop</title>
 </head>
@@ -344,8 +348,41 @@ include_once '../controller/categorieController.php';
         background-color: red;
         -webkit-appearance: none
     }
+    .shopping-card {
+        background-color: #28a745; /* Green background */
+        color: white;
+        border-radius: 10px;
+        padding: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease-in-out; /* Smooth animation */
+    }
 
+    .shopping-card:hover {
+        transform: scale(1.05); /* Enlarge on hover */
+    }
 
+    .card-image {
+        width: 80px;
+        border-radius: 10px;
+    }
+
+    .card-name {
+        font-weight: bold;
+    }
+
+    .card-price {
+        color: #ffc107; /* Yellow color for price */
+    }
+    .myheader{
+        background-image: url("../assets/images/bg.jpg");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 60vh;
+    }
+    h1 {
+        text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+    }
 
 </style>
 
@@ -367,28 +404,24 @@ include_once '../controller/categorieController.php';
                 <li class="nav-item">
                     <a class="nav-link text-white" href="#">Blog</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <li class="">
+                    <a class="nav-link  text-white" href="panier.php" >
                         Cart
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Item 1</a></li>
-                        <li><a class="dropdown-item" href="#">Item 2</a></li>
-                    </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="#">Logout</a>
+                    <a class="nav-link text-white" href="../controller/controller.php?logout=true">Logout</a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
 
-<div class="container">
-    <div class="text-center text-white my-5">
-        <h1 class="my-5" >Welcome To Our Store </h1>
-        <p class="w-50 mx-auto">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Totam quasi dolore inventore expedita. Unde eius facilis eveniet nihil fuga, odit accusamus quisquam! Nobis, nam. Quos quae voluptatibus esse tempore porro?</p>
+    <div class="text-center text-white py-5 myheader">
+        <h1 class="my-2 display-1" >Welcome To Our Store </h1>
+        <p class="w-75 mx-auto display-6">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Totam quasi dolore inventore expedita. Unde eius facilis eveniet nihil fuga, odimpore porro?</p>
     </div>
+<div class="container">
     <div class="bg-white rounded d-flex align-items-center justify-content-between mt-4" id="header">
         <button class="btn btn-hide" type="button" data-bs-toggle="collapse" data-bs-target="#filterbar" aria-expanded="false" aria-controls="filterbar">
             <span class="fas fa-angle-left" id="filter-angle"></span>
@@ -436,11 +469,11 @@ include_once '../controller/categorieController.php';
                 ?>
                 <div class="col">
                     <div class="card d-flex flex-column align-items-center">
-                        <p><?=$plante['nom'] ;?></p>
+                        <p><?= $plante['nom']; ?></p>
                         <img class="my-2" src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($plante['image']); ?>" style="width: 200px;  border-radius: 10px;" />
-                    <div
-                        <a  class="btn btn-shop btn-sm" href="../controller/controller.php?id=<?=$plante['idPlante'] ;?>">ajouter au panier</a>
-                    </div>
+                        <div>
+                            <a class="btn btn-shop btn-sm" href="../controller/controller.php?addToPanier=<?= $plante['idPlante']; ?>">Ajouter au panier</a>
+                        </div>
                     </div>
                 </div>
                 <?php
@@ -450,6 +483,20 @@ include_once '../controller/categorieController.php';
         </div>
     </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>

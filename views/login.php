@@ -18,7 +18,7 @@ session_destroy();
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-yGBsXpPFFLEGD2Z/J6a3chIpN4I/XFdbn2jkPJH2eZxGc2gwdS04Mw9laYfh9Y4u" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script> <!-- Replace 'your-fontawesome-kit.js' with your actual FontAwesome kit URL -->
 
-    <title>our shop</title>
+    <title>Login</title>
 </head>
 <body >
 
@@ -40,15 +40,11 @@ session_destroy();
     <section class="container information-processing-form rounded-2">
         <div class="row d-flex align-items-center">
             <div class="col-sm-6 d-block">
-                <img src="https://img.freepik.com/free-vector/sign-concept-illustration_114360-5267.jpg?w=740&t=st=1702829302~exp=1702829902~hmac=f2bfa290a39dce45feca868f1225cb5aa4b563f1eb6687bd8c58866a19d2f70a" width="100%" class="rounded-5">
+                <img src="https://img.freepik.com/free-vector/secure-login-concept-illustration_114360-4320.jpg?w=740&t=st=1702896826~exp=1702897426~hmac=cf74a3a0b57febf81434f87ca0298e5a7fd49a1427db2e4161de0096ff5d586e" width="100%" class="rounded-5">
             </div>
             <div class="col">
-                <h1 class="text-center text-success display-2 " style="font-weight: 400">Sign Up</h1>
+                <h1 class="text-center text-success display-1 " style="font-weight: 400">Login</h1>
                 <form method="post"  action="../controller/controller.php" class="p-5">
-                    <div class="form-floating mb-3">
-                        <input id="email" type="text" name="uid" class="form-control shadow-none border-success" required autocomplete="email" placeholder="...">
-                        <label for="email" class="text-black-50">Enter your name</label>
-                    </div>
 
                     <div class="form-floating mb-3">
                         <input id="email" type="email" name="email" class="form-control shadow-none border-success" required autocomplete="email" placeholder="...">
@@ -60,12 +56,9 @@ session_destroy();
                         <label for="password" class="text-black-50">Enter your password</label>
 
                     </div>
-                    <div class="form-floating mb-3">
-                        <input id="password-confirm" type="password" class="form-control shadow-none border-success" name="password-repeat" required autocomplete="new-password" placeholder="...">
-                        <label for="password-confirm" class="text-black-50">Confirm your password.</label>
-                    </div>
-                    <button class="btn btn-success w-100 mb-2" name="signup-submit" type="submit">Next</button>
-                    <span>You have account? </span><a href="login.php" class="text-decoration-none text-success">Log in !</a>
+
+                    <button class="btn btn-success w-100 mb-2" name="login" type="submit">Login</button>
+                    <span>You Don't have account? </span><a href="signUp.php" class="text-decoration-none text-success">Sign in !</a>
                 </form>
             </div>
         </div>

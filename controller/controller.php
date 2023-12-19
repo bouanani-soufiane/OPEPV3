@@ -1,15 +1,19 @@
 <?php
-session_start();
 require_once '../config/database.php';
 include_once 'userController.php';
 include_once 'planteController.php';
 include_once 'categorieController.php';
 include_once 'panierController.php';
+include_once  'panierPlanteController.php';
+include_once 'commandeController.php';
+
 
 $plantController = new PlantController();
 $categController = new categorieController();
 $userController = new UserController();
 $panierController = new PanierController();
+$PanierPlanteController = new PanierPlanteController();
+$commandeController = new CommandeController();
 
 
 
@@ -22,13 +26,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $tmp_name = $_FILES['imagePlante']['tmp_name'];
         $imageName = file_get_contents($tmp_name);
 
+        $plantController->__get('plantModel')->__set("plantName", $nomPlante);
+        $plantController->__get('plantModel')->__set("plantPrice", $prixPlante);
+        $plantController->__get('plantModel')->__set("plantImage", $imageName);
+        $plantController->__get('plantModel')->__set("IDcategory", $catPlante);
 
-        $plantController->__set("plantName", $nomPlante);
-        $plantController->__set("plantPrice", $prixPlante);
-        $plantController->__set("plantImage", $imageName);
-        $plantController->__set("IDcategory", $catPlante);
-
-        $plantController->createPlante($nomPlante, $prixPlante, $imageName, $catPlante);
+        $plantController->createPlante($plantController->__get('plantModel'));
 
         header("Location: ../views/dashboard.php?added=success");
     }
@@ -99,9 +102,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['idPanier'] = $idPanier;
             header("Location: ../views/shop.php?");
 
-
         }
 
+    }
+    if (isset($_POST["login"])) {
+        $email = $_POST["email"];
+        $password = $_POST["password"];
+        $idRole = $userController->retriveRole($email);
+        $loggedInUserId = $userController->login($email, $password);
+
+        if ($loggedInUserId !== null && $idRole == 1) {
+            $_SESSION['admin'] = "admin";
+            header("Location: ../views/dashboard.php");
+            exit();
+        } elseif ($loggedInUserId !== null && $idRole == 2) {
+            $idUser = $userController->retriveId($email);
+            $idPanier = $panierController->retriveId($idUser);
+            $_SESSION['client'] = "client";
+            $_SESSION['idUser'] = $idUser;
+            $_SESSION['idPanier'] = $idPanier;
+
+            header("Location: ../views/shop.php");
+            exit();
+        } else {
+            // Invalid login credentials
+            echo "Invalid email or password";
+        }
     }
 
 }
@@ -116,7 +142,41 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET'){
     if(isset($_GET['deleteCateg'])){
         $categController->deleteCateg($_GET['deleteCateg']);
         header("Location: ../views/dashboard.php?deleted=success");
-
     }
+    if(isset($_GET['logout'])){
+        $userController->logout();
+        header("Location: ../views/signUp.php");
+    }
+    if (isset($_GET["addToPanier"])) {
+        $idPlante = $_GET['addToPanier'];
+        $idPanier = $_SESSION['idPanier'];
+
+        $PanierPlanteController->__get('PanierplanteModel')->__set("plante_id", $idPlante);
+        $PanierPlanteController->__get('PanierplanteModel')->__set("panier_id", $idPanier);
+
+
+        $PanierPlanteController->addToPanier($PanierPlanteController->__get('PanierplanteModel'));
+
+        header("Location: ../views/shop.php?added=success");
+    }
+    if(isset($_GET['deleteFromPanier'])){
+        $PanierPlanteController->deleteFromPanier($_GET['deleteFromPanier']);
+        header("Location: ../views/panier.php?deleted=success");
+    }
+    if (isset($_GET["commander"])) {
+        $idPivot = $_GET['idPivot'];
+        $idPlante = $_GET['idPlante'];
+        $numCommande = mt_rand(100, 100000);
+
+        $commandeController->__get('CommandeModel')->__set("numCommande", $numCommande);
+        $commandeController->__get('CommandeModel')->__set("idPivotfk", $idPivot);
+
+        $commandeController->checkout($commandeController->__get('CommandeModel'));
+
+        $PanierPlanteController->updateStatusQtt($idPlante);
+
+        header("Location: ../views/panier.php?checkout=success");
+    }
+
 
 }

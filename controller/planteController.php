@@ -15,14 +15,11 @@ class PlantController{
     {
         if (property_exists($this, $property)) $this->$property = $value;
     }
-    public function createPlante($plantName, $plantPrice, $plantImage, $IDcategory)
-    {
-        $this->plantModel->__set("plantName", $plantName);
-        $this->plantModel->__set("plantPrice", $plantPrice);
-        $this->plantModel->__set("plantImage", $plantImage);
-        $this->plantModel->__set("IDcategory", $IDcategory);
 
-        $this->plantModel->createPlant($plantName, $plantPrice, $plantImage, $IDcategory);
+//    this should accept Plant model as parametter
+    public function createPlante(PlantModel $PlantModel)
+    {
+        $this->plantModel->createPlant($PlantModel);
     }
     public function editPlante($plantId,$nomPlante, $prixPlante, $imageName, $catPlante){
         $this->plantModel->__set("plantName", $plantId);

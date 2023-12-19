@@ -29,13 +29,8 @@ class PlantModel{
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    public function createPlant($plantName, $plantPrice, $plantImage, $IDcategory)
+    public function createPlant()
     {
-        $this->plantName = $plantName;
-        $this->plantPrice = $plantPrice;
-        $this->plantImage = $plantImage;
-        $this->IDcategory = $IDcategory;
-
         $query = "INSERT INTO plante (nom, prix, image, idCategorie) VALUES (?,?,?,?)";
         $stmt = $this->db->prepare($query);
 

@@ -1,6 +1,6 @@
 <?php
 include_once '../model/userModel.php';
-
+session_start();
 class UserController{
 
     private $userModel;
@@ -13,12 +13,10 @@ class UserController{
     {
         if (property_exists($this, $property)) return $this->$property;
     }
-
     public function __set($property, $value)
     {
         if (property_exists($this, $property)) $this->$property = $value;
     }
-
     public function createUser($name, $email, $password)
     {
         $this->userModel->__set("name", $name);
@@ -37,6 +35,18 @@ class UserController{
     public function retriveId($email){
         return $this->userModel->retriveId($email);
     }
+    public function retriveRole($email){
+        return $this->userModel->retriveRole($email);
+    }
+    public function login($email, $password){
+        $loggedInUserId = $this->userModel->login($email, $password);
+        return $loggedInUserId;
 
+
+    }
+    public function logout(){
+        session_unset();
+        session_destroy();
+    }
 }
 ?>

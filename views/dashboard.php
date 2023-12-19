@@ -50,7 +50,7 @@ include_once '../controller/categorieController.php';
     }
 
     .btn-add {
-        background-color: #040;
+        background-color: #0b492d;
         color: #fff;
     }
 
@@ -83,13 +83,13 @@ include_once '../controller/categorieController.php';
     }
 
     .form button {
-        background-color: #4caf50;
+        background-color: #0b492d;
         color: #fff;
         cursor: pointer;
     }
 
     .form button:hover {
-        background-color: #45a049;
+        background-color: #0b492d;
     }
 
     .modal {
